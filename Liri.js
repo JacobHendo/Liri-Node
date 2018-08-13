@@ -23,7 +23,7 @@ function runTweets() {
         if (!error) {
             for (var i = 0; i < tweets.length; i++) {
                 console.log("@: " + tweets[i].text + " Created on: " + tweets[i].created_at.substring(0, 19));
-                console.log("--")
+                
             }
         } else {
             console.log(er);
@@ -41,3 +41,65 @@ function runSpotify() {
         if (err) {
             return console.log('Error occurred: ' + err);
         }
+        for (var i = 0; i < data.tracks.items.length; i++) {
+            /
+            console.log("Artist(s): " + data.tracks.items[i].artists[0].name);
+            console.log("Song name: " + data.tracks.items[i].name);
+            console.log("Album name: " + data.tracks.items[i].album.name);
+            console.log("Preview Link: " + data.tracks.items[i].preview_url);
+        }
+    });
+  }
+  switch (siteStatement) {
+    case "spotify-this-song":
+      spotify();
+      break;
+    case "do-what-it-says":
+      doWhatItSays();
+      break;
+    case "movie-this":
+      omdb();
+      break;
+    
+  }  
+
+  function doWhatItSays() {
+   
+    var fs = require("fs");
+    
+    fs.readFile("./rondom.txt", "utf8", function (error, data) {
+      if (error) {
+        return console.log(error);
+      }
+   
+      var random = data.split(",");
+      siteStatement = random[0];
+      search = random[1];
+      
+      spotify();
+    });
+
+  }
+  function omdb() {
+    
+    search = search || "Mr. Nobody"
+    
+    var queryUrl = "http://www.omdbapi.com/?t=" + search + "&y=&plot=short&apikey=a28224d5";
+   
+    request(queryUrl, function (error, response, body) {
+      // If the JSON response is error free
+      if (!error && response.statusCode === 200) {
+        // console log the following from the JSON response
+        console.log("Title: " + JSON.parse(body).Title);
+        console.log("Release Year: " + JSON.parse(body).Year);
+        console.log("Rated: " + JSON.parse(body).Rated);
+        console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value + " Fresh");
+        console.log("Produced in: " + JSON.parse(body).Country);
+        console.log("Language(s): " + JSON.parse(body).Language);
+        console.log("Plot: " + JSON.parse(body).Plot);
+        console.log("Starring: " + JSON.parse(body).Actors);
+      }
+     
+    })
+  }
+  
