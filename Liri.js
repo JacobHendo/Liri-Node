@@ -50,7 +50,7 @@ function spotify() {
         }
     });
   }
-  switch (keywords) {
+  switch (keyword) {
     case "my-tweets":
     tweets();
     break;
