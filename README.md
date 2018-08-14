@@ -14,7 +14,7 @@ https://jacobhendo.github.io/Liri-Node/
 *   JavaScript, .env, .gitnore, Json
 
 ## Gif of working in terminal
-![](http://recordit.co/VKt1bOVluG)
+![](http://g.recordit.co/VKt1bOVluG.gif)
 
 
 ## Authors
