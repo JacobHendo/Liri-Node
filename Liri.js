@@ -15,14 +15,14 @@ for (var i = 3; i < wholeArgv.length; i++) {
     }
 }
 
-function runTweets() {
+function tweets() {
     var Twitter = require("twitter");
     var client = new Twitter(keys.twitter);
     var screenName = { screen_name: "" };
     client.get('statuses/user_timeline', screenName, function (error, tweets) {
         if (!error) {
             for (var i = 0; i < tweets.length; i++) {
-                console.log("@: " + tweets[i].text + " Created on: " + tweets[i].created_at.substring(0, 19));
+                console.log("@: " + tweets[i].text + " " + tweets[i].created_at.substring(0, 19));
                 
             }
         } else {
@@ -30,7 +30,7 @@ function runTweets() {
         }
     });
 }
-function runSpotify() {
+function spotify() {
     
     var Spotify = require('node-spotify-api');
     var spotify = new Spotify(keys.spotify)
@@ -42,7 +42,7 @@ function runSpotify() {
             return console.log('Error occurred: ' + err);
         }
         for (var i = 0; i < data.tracks.items.length; i++) {
-            /
+            
             console.log("Artist(s): " + data.tracks.items[i].artists[0].name);
             console.log("Song name: " + data.tracks.items[i].name);
             console.log("Album name: " + data.tracks.items[i].album.name);
@@ -50,10 +50,15 @@ function runSpotify() {
         }
     });
   }
-  switch (siteStatement) {
+  switch (keywords) {
+    case "my-tweets":
+    tweets();
+    break;
+
     case "spotify-this-song":
       spotify();
       break;
+
     case "do-what-it-says":
       doWhatItSays();
       break;
@@ -63,28 +68,33 @@ function runSpotify() {
     
   }  
 
-  function doWhatItSays() {
-   
-    var fs = require("fs");
+  
+function doWhatItSays() {
     
-    fs.readFile("./rondom.txt", "utf8", function (error, data) {
-      if (error) {
-        return console.log(error);
-      }
+    var fs = require("fs");
    
-      var random = data.split(",");
-      siteStatement = random[0];
-      search = random[1];
-      
-      spotify();
-    });
+    fs.readFile("random.txt", "utf8", function (error, data) {
+        
+        if (error) {
+            return console.log(error);
+        }
+       
+        var dataArr = data.split(",");
 
-  }
+        keyword = dataArr[0];
+        search = dataArr[1];
+        spotify();
+
+    });
+    
+}
+
+  
   function omdb() {
     
-    search = search || "Mr. Nobody"
+    search = search ||"Mr.Nobody"
     
-    var queryUrl = "http://www.omdbapi.com/?t=" + search + "&y=&plot=short&apikey=a28224d5";
+    var queryUrl = "http://www.omdbapi.com/?t=" + search + "&y=&plot=short&apikey=trilogy";
    
     request(queryUrl, function (error, response, body) {
       // If the JSON response is error free
@@ -102,4 +112,4 @@ function runSpotify() {
      
     })
   }
-  
+ 
