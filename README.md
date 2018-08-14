@@ -13,6 +13,8 @@ https://jacobhendo.github.io/Liri-Node/
 *   (https://www.npmjs.com/package/twitter) (https://www.npmjs.com/package/request) (https://www.npmjs.com/package/spotify-uri)(https://www.npmjs.com/package/dotenv) - Dependency 
 *   JavaScript, .env, .gitnore, Json
 
+## Gif of working in terminal
+![](http://recordit.co/VKt1bOVluG)
 
 
 ## Authors
