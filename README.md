@@ -10,7 +10,7 @@ https://jacobhendo.github.io/Liri-Node/
 
 ## Built With
 
-*   (https://www.npmjs.com/package/twitter) (https://www.npmjs.com/package/request) (https://www.npmjs.com/package/spotify-uri) - Dependency 
+*   (https://www.npmjs.com/package/twitter) (https://www.npmjs.com/package/request) (https://www.npmjs.com/package/spotify-uri)(https://www.npmjs.com/package/dotenv) - Dependency 
 *   JavaScript, .env, .gitnore, Json
 
 
