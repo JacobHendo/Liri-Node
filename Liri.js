@@ -73,7 +73,7 @@ function doWhatItSays() {
     
     var fs = require("fs");
    
-    fs.readFile("random.txt", "utf8", function (error, data) {
+    fs.readFile("./random.txt", "utf8", function (error, data) {
         
         if (error) {
             return console.log(error);
@@ -90,26 +90,33 @@ function doWhatItSays() {
 }
 
   
-  function omdb() {
-    
-    search = search ||"Mr.Nobody"
-    
+function omdb() {
+    //require request package
+    var request = require("request")
+    //allow for user not entering search parameter
+    search = search || "Mr. Nobody"
+    //store URL for api including search parameter
     var queryUrl = "http://www.omdbapi.com/?t=" + search + "&y=&plot=short&apikey=trilogy";
-   
+    //ombd api call
     request(queryUrl, function (error, response, body) {
-      // If the JSON response is error free
-      if (!error && response.statusCode === 200) {
-        // console log the following from the JSON response
-        console.log("Title: " + JSON.parse(body).Title);
-        console.log("Release Year: " + JSON.parse(body).Year);
-        console.log("Rated: " + JSON.parse(body).Rated);
-        console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value + " Fresh");
-        console.log("Produced in: " + JSON.parse(body).Country);
-        console.log("Language(s): " + JSON.parse(body).Language);
-        console.log("Plot: " + JSON.parse(body).Plot);
-        console.log("Starring: " + JSON.parse(body).Actors);
-      }
-     
+
+        // If the request is successful (i.e. if the response status code is 200)
+        if (!error && response.statusCode === 200) {
+            //log relevant data, with divisions
+            console.log("Title: " + JSON.parse(body).Title);
+            console.log("Release Year: " + JSON.parse(body).Year);
+            console.log("Rated: " + JSON.parse(body).Rated);
+            //console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value + " Fresh");
+            console.log("Produced in: " + JSON.parse(body).Country);
+            console.log("Language(s): " + JSON.parse(body).Language);
+            console.log("Plot: " + JSON.parse(body).Plot);
+            console.log("Starring: " + JSON.parse(body).Actors);
+            console.log("-----------------------------");
+
+        }
+        //end of api call
     })
-  }
+    //end of ombd function
+}
+  
  
